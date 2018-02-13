@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     // UI references.
     private AutoCompleteTextView mEmailView;
+    private Button cancelButton;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -87,6 +88,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        cancelButton = (Button) findViewById(R.id.button_cancel);
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginCancelClicked(view);
             }
         });
 
@@ -345,6 +354,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public void loginCancelClicked(View view) {
+        finish();
     }
 }
 
