@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="198dp"
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="BuzzShelter"
         android:textAlignment="center"
-        android:textSize="35sp"
-        android:layout_marginTop="25dp"
-        android:text="Welcome to this app" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:layout_marginTop="25dp"
-        android:text="that is %100 not a varius on your phone." />
+        android:textSize="35sp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,4 +41,5 @@
             android:text="Register"/>
 
     </LinearLayout>
+
 </LinearLayout>
