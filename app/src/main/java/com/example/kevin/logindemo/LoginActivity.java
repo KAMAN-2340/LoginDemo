@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Temporary proof of concept to locally store users.
      */
     public static Users users = new Users();
+    public static Admins admins = new Admins();
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -322,8 +324,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
             if (users.contains(mEmail, mPassword)) {
+                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                startActivity(intent);
+            } else if (admins.contains(mEmail, mPassword)) {
                 Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                 startActivity(intent);
             } else {

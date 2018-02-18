@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -13,6 +14,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerButton;
     private EditText emailEditText;
     private EditText passwordEditText;
+    private RadioButton userRadioButton;
+    private RadioButton adminRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,26 @@ public class RegisterActivity extends AppCompatActivity {
                 registerCancelClicked(view);
             }
         });
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerClicked(view);
+            }
+        });
+
+        userRadioButton = (RadioButton) findViewById(R.id.radio_button_user);
+        adminRadioButton = (RadioButton) findViewById(R.id.radio_button_admin);
+
+        userRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userButtonClicked(view);
+            }
+        });
+        adminRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adminButtonClicked(view);
             }
         });
     }
@@ -52,10 +70,23 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, (email.length() == 0 ? "email" : "password")
                     + " is a required field", Toast.LENGTH_SHORT).show();
         } else {
-            LoginActivity.users.add(email, password);
-            finish();
+            if (userRadioButton.isChecked()) {
+                LoginActivity.users.add(email, password);
+                finish();
+            } else {
+                LoginActivity.users.add(email, password);
+                finish();
+            }
         }
     }
 
+    private void userButtonClicked(View view) {
+        userRadioButton.setChecked(true);
+        adminRadioButton.setChecked(false);
+    }
 
+    private void adminButtonClicked(View view) {
+        adminRadioButton.setChecked(true);
+        userRadioButton.setChecked(false);
+    }
 }

@@ -12,7 +12,6 @@ public class Users {
 
     public Users() {
         users = new HashMap<>();
-        users.put("admin", "admin");
     }
 
     public void add(String email, String password) {
