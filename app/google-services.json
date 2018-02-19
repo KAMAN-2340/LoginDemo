@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "981824460030",
+    "firebase_url": "https://fir-db-c5772.firebaseio.com",
+    "project_id": "fir-db-c5772",
+    "storage_bucket": "fir-db-c5772.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981824460030:android:493ae53abf4f1e6c",
+        "android_client_info": {
+          "package_name": "com.example.kevin.logindemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981824460030-j5qtk9ffu0l18r17ptm9mecamtbj0073.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsYzZ0DrSi1INsW39i9UKa6Ei08PC1m8o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
+
 /**
  * Created by Nick on 2/12/2018.
  */
@@ -15,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
