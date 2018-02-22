@@ -16,6 +16,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private RadioButton userRadioButton;
     private RadioButton adminRadioButton;
+    private String userType = "User";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,14 @@ public class RegisterActivity extends AppCompatActivity {
         userRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userType = "User";
                 userButtonClicked(view);
             }
         });
         adminRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                userType = "Admin";
                 adminButtonClicked(view);
             }
         });
@@ -72,9 +75,15 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             if (userRadioButton.isChecked()) {
                 LoginActivity.users.add(email, password);
+                Toast.makeText(RegisterActivity.this, "Register "
+                                + "Successfully as " + userType + ".",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                LoginActivity.users.add(email, password);
+                LoginActivity.admins.add(email, password);
+                Toast.makeText(RegisterActivity.this, "Register "
+                                + "Successfully as " + userType + ".",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
