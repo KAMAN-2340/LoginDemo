@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".HomePageActivity"></activity>
+        <activity android:name=".HomePageActivity" />
+        <activity android:name=".ShelterInformationActivity"></activity>
     </application>
 
 </manifest>
