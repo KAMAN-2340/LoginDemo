@@ -1,23 +1,26 @@
 package com.example.kevin.logindemo;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 
 public class HomePageActivity extends AppCompatActivity {
+
     private RecyclerView shelterDatabaseRecyclerView;
-    private RecyclerView.Adapter shelterDatabaseAdapter;
+    private ShelterDatabaseAdapter shelterDatabaseAdapter;
     private RecyclerView.LayoutManager shelterDatabaseLayoutManager;
+    private SearchView searchView;
 
     private ArrayList<Shelter> shelters;
 
@@ -25,6 +28,8 @@ public class HomePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Search");
 
         loadShelterDatabase();
 
@@ -34,7 +39,7 @@ public class HomePageActivity extends AppCompatActivity {
         shelterDatabaseLayoutManager = new LinearLayoutManager(this);
         shelterDatabaseRecyclerView.setLayoutManager(shelterDatabaseLayoutManager);
 
-        shelterDatabaseAdapter = new ShelterDatabaseAdapter(shelters, this);
+        shelterDatabaseAdapter = new ShelterDatabaseAdapter(shelters, shelters, this);
         shelterDatabaseRecyclerView.setAdapter(shelterDatabaseAdapter);
     }
 
@@ -46,14 +51,33 @@ public class HomePageActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        new MenuInflater(this).inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_home_page, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.getItem(0)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                shelterDatabaseAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                shelterDatabaseAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
-            finish();
+        if (item.getItemId() == R.id.action_search) {
             return true;
         } else {
             return super.onOptionsItemSelected(item);
