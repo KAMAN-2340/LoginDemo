@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
                         filteredShelters = ShelterDatabaseSearcher.searchChildren(shelters);
                     } else if (charSequenceString.equals("young adults")) {
                         filteredShelters = ShelterDatabaseSearcher.searchYoungAdults(shelters);
-                    } else if (charSequenceString.equals("Anyone")) {
+                    } else if (charSequenceString.equals("anyone")) {
                         filteredShelters = ShelterDatabaseSearcher.searchAnyone(shelters);
                     } else {
                         filteredShelters = ShelterDatabaseSearcher.searchByName(shelters, charSequenceString);

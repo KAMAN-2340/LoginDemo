@@ -16,6 +16,11 @@ public class ShelterDatabaseSearcher {
             if (!restrictions.contains("women")) {
                 newFilteredList.add(sh);
             }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
+                newFilteredList.add(sh);
+            }
         }
         return newFilteredList;
     }
@@ -29,6 +34,11 @@ public class ShelterDatabaseSearcher {
             } else if (!restrictions.contains("Men")) {
                 newFilteredList.add(sh);
             }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
+                newFilteredList.add(sh);
+            }
         }
         return newFilteredList;
     }
@@ -38,6 +48,11 @@ public class ShelterDatabaseSearcher {
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("families")) {
+                newFilteredList.add(sh);
+            }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
                 newFilteredList.add(sh);
             }
         }
@@ -51,6 +66,11 @@ public class ShelterDatabaseSearcher {
             if (restrictions.contains("newborn")) {
                 newFilteredList.add(sh);
             }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
+                newFilteredList.add(sh);
+            }
         }
         return newFilteredList;
     }
@@ -60,6 +80,11 @@ public class ShelterDatabaseSearcher {
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("newborn") || restrictions.contains("families")) {
+                newFilteredList.add(sh);
+            }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
                 newFilteredList.add(sh);
             }
         }
@@ -73,6 +98,11 @@ public class ShelterDatabaseSearcher {
             if (restrictions.contains("children")) {
                 newFilteredList.add(sh);
             }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
+                newFilteredList.add(sh);
+            }
         }
         return newFilteredList;
     }
@@ -82,6 +112,11 @@ public class ShelterDatabaseSearcher {
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("young adults")) {
+                newFilteredList.add(sh);
+            }
+            if (restrictions.contains("anyone")) {
+                newFilteredList.add(sh);
+            } else if (restrictions.length() == 0) {
                 newFilteredList.add(sh);
             }
         }
