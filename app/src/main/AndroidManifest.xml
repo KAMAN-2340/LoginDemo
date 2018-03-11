@@ -27,23 +27,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-
-        <activity android:name=".HomePageActivity"
-            android:label="Search" >
+        <activity
+            android:name=".HomePageActivity"
+            android:label="Search">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"
-                android:value=".HomePageActivity"/>
+                android:value=".HomePageActivity" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".ShelterInformationActivity"></activity>
-
+        <activity android:name=".ShelterInformationActivity" />
+        <activity
+            android:name=".LandingPageActivity"
+            android:label="@string/title_activity_landing_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
