@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "330271057058",
+    "firebase_url": "https://kaman-buzzshelter.firebaseio.com",
+    "project_id": "kaman-buzzshelter",
+    "storage_bucket": "kaman-buzzshelter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330271057058:android:493ae53abf4f1e6c",
+        "android_client_info": {
+          "package_name": "com.example.kevin.logindemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330271057058-asklejl0gakffjq1el24l957442o6gmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpgVLh0q8fw_eVq2dvKHVGkt9GYBycEO0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
