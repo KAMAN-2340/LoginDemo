@@ -41,13 +41,13 @@ public class ShelterInformationActivity extends AppCompatActivity {
     }
 
     private void setInformationViews() {
-        shelterNameTextView.setText(shelter.getName());
-        capacityTextView.setText(shelter.getCapacity());
-        restrictionsTextView.setText(shelter.getRestrictions());
-        longitudeTextView.setText(shelter.getLongitude());
-        latitudeTextView.setText(shelter.getLatitude());
-        addressTextView.setText(shelter.getAddress());
-        phoneNumberTextView.setText(shelter.getPhoneNumber());
+        shelterNameTextView.setText("Name: " + shelter.getName());
+        capacityTextView.setText("Capacity: " + shelter.getCapacity());
+        restrictionsTextView.setText("Restrictions: " + shelter.getRestrictions());
+        longitudeTextView.setText("Longitude: " + shelter.getLongitude());
+        latitudeTextView.setText("Latitude: " + shelter.getLatitude());
+        addressTextView.setText("Address: " + shelter.getAddress());
+        phoneNumberTextView.setText("Phone Number: " + shelter.getPhoneNumber());
     }
 
     @Override

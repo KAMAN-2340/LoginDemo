@@ -30,6 +30,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,11 +76,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private FirebaseAuth fireBaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // If User already logged in, start homepage activity
+        fireBaseAuth = FirebaseAuth.getInstance();
+        /*if (fireBaseAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            startActivity(intent);
+        }*/
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -315,6 +330,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private boolean flag = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -323,7 +339,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            fireBaseAuth.signInWithEmailAndPassword(mEmail, mPassword)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Log In Successful.",
+                                        Toast.LENGTH_SHORT).show();
+                                flag = true;
+                                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                                finish();
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Log In "
+                                                + "Unsuccessful. Please try again.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            return flag;
+
+
+
             // TODO: attempt authentication against a network service.
+            /*
             if (users.contains(mEmail, mPassword)) {
                 Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
                 startActivity(intent);
@@ -334,6 +373,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
             return true;
+            */
         }
 
         @Override
