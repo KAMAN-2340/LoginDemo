@@ -35,7 +35,6 @@ public class LandingPageActivity extends AppCompatActivity
         shelterListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 Intent intent = new Intent(LandingPageActivity.this, HomePageActivity.class);
                 startActivity(intent);
             }
