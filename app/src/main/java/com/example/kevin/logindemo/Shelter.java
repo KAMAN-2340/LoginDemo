@@ -19,6 +19,7 @@ public class Shelter implements Parcelable {
     private String address;
     private String specialNotes;
     private String phoneNumber;
+    private String vacancy;
 
     public Shelter(String[] info) {
         key = info[0];
