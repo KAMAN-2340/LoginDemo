@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private FirebaseAuth fireBaseAuth;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +125,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        //mProgressView = findViewById(R.id.login_progress);
+        progressBar = (ProgressBar) findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
@@ -216,19 +219,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+//            showProgress(true);
+            progressBar.setVisibility(View.VISIBLE);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
+        //TODO: Replace this with your own logic. Maybe look for sql injection?
         return email.contains("");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
+        //TODO: Replace this with your own logic. Maybe look for sql injection?
         return true;
     }
 
@@ -330,7 +334,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
-        private boolean flag = false;
+        private boolean flag;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -347,11 +351,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 Toast.makeText(LoginActivity.this, "Log In Successful.",
                                         Toast.LENGTH_SHORT).show();
                                 flag = true;
+                                mPasswordView.setText("");
                                 Intent intent = new Intent(LoginActivity.this,
                                         LandingPageActivity.class);
-                                finish();
+                               // finish();
                                 startActivity(intent);
+                                progressBar.setVisibility(View.INVISIBLE);
                             } else {
+                                progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(LoginActivity.this, "Log In "
                                                 + "Unsuccessful. Please try again.",
                                         Toast.LENGTH_SHORT).show();
@@ -380,20 +387,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
+//            showProgress(false);
 
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+//                mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                mPasswordView.requestFocus();
             }
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+//            showProgress(false);
         }
     }
 

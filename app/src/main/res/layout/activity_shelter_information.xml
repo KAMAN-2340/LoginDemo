@@ -66,5 +66,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reserve_room_button"
+        android:text="Reserve a room"
+        app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -16,12 +16,15 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LandingPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth fireBaseAuth;
     private Button shelterListButton;
+    private DatabaseReference data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,12 @@ public class LandingPageActivity extends AppCompatActivity
         setContentView(R.layout.activity_landing_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        data = FirebaseDatabase.getInstance().getReference("Users");
+        String id = data.push().getKey();
+        Integer i = 50;
+        data.child(id).setValue(i);
+
 
         fireBaseAuth = FirebaseAuth.getInstance();
         shelterListButton = findViewById(R.id.shelter_list_button);
