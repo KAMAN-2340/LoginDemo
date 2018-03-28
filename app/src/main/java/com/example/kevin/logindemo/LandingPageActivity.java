@@ -14,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LandingPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +37,6 @@ public class LandingPageActivity extends AppCompatActivity
         shelterListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
                 Intent intent = new Intent(LandingPageActivity.this, HomePageActivity.class);
                 startActivity(intent);
             }
@@ -58,6 +59,9 @@ public class LandingPageActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override
@@ -74,6 +78,9 @@ public class LandingPageActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.landing_page, menu);
+        FirebaseUser user = fireBaseAuth.getCurrentUser();
+        TextView nav_email = (TextView) findViewById(R.id.nav_header_email);
+        nav_email.setText(user.getEmail());
         return true;
     }
 
@@ -98,8 +105,14 @@ public class LandingPageActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if (id == R.id.nav_info) {
+            // Handle the user info
+            Intent intent = new Intent(this, UserInfoActivity.class);
+            startActivity(intent);
+        }
+
         if (id == R.id.nav_logout) {
-            // Handle the camera action
+            // Handle the sign out
             fireBaseAuth.signOut();
             finish();
         }

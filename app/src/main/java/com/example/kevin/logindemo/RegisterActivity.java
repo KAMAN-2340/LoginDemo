@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,16 +27,22 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton userRadioButton;
     private RadioButton adminRadioButton;
     private ProgressDialog progressDialog;
-    private FirebaseAuth fireBaseAuth;
     private String userType = "User";
+
+    private FirebaseAuth fireBaseAuth;
+    private Firebase mRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         progressDialog = new ProgressDialog(this);
         fireBaseAuth = FirebaseAuth.getInstance();
+        FirebaseApp.initializeApp(this);
 
         emailEditText = (EditText) findViewById(R.id.editText_email);
         passwordEditText = (EditText) findViewById(R.id.editText_password);
@@ -80,15 +88,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registerClicked(View view) {
         // Add to database and go to log-in
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        final String email = emailEditText.getText().toString();
+        final String password = passwordEditText.getText().toString();
         if (email.length() == 0 || password.length() == 0) {
             Toast.makeText(RegisterActivity.this, (email.length() == 0 ? "email" : "password")
                     + " is a required field", Toast.LENGTH_SHORT).show();
         } else {
             progressDialog.setMessage("Registering User...");
             progressDialog.show();
-            //LoginActivity.users.add(email, password);
             fireBaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -98,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Register "
                                                 + "Successfully as " + userType + ".",
                                         Toast.LENGTH_SHORT).show();
+                                createFirebaseUser(email);
                                 finish();
                                 startActivity(new Intent(RegisterActivity.this,
                                         LoginActivity.class));
@@ -135,5 +143,16 @@ public class RegisterActivity extends AppCompatActivity {
     private void adminButtonClicked(View view) {
         adminRadioButton.setChecked(true);
         userRadioButton.setChecked(false);
+    }
+
+    private void createFirebaseUser (String email) {
+        Firebase.setAndroidContext(this);
+        mRef = new Firebase("https://kaman-buzzshelter.firebaseio.com/");
+        Users dummy = new Users(email);
+        String id = email.substring(0, email.indexOf("@"));
+        Firebase mRefChild = mRef.child("users");
+        Firebase mRefChildd = mRefChild.child(id);
+        mRefChildd.setValue(dummy);
+
     }
 }

@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Temporary proof of concept to locally store users.
      */
-    public static Users users = new Users();
-    public static Admins admins = new Admins();
+    //public static Users users = new Users();
+    //public static Admins admins = new Admins();
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -349,7 +349,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 flag = true;
                                 Intent intent = new Intent(LoginActivity.this,
                                         LandingPageActivity.class);
-                                finish();
+                                mPasswordView.setText("");
+                                //finish();
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(LoginActivity.this, "Log In "

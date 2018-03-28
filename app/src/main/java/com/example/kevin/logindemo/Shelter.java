@@ -3,6 +3,10 @@ package com.example.kevin.logindemo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
+
 /**
  * Created by Nick on 2/26/2018.
  * Unique Key,Shelter Name,Capacity,Restrictions,Longitude ,Latitude ,Address,Special Notes,Phone Number
@@ -10,37 +14,56 @@ import android.os.Parcelable;
 
 public class Shelter implements Parcelable {
 
-    private String key;
+    private long key;
     private String name;
     private String capacity;
     private String restrictions;
-    private String longitude;
-    private String latitude;
+    private double longitude;
+    private double latitude;
     private String address;
     private String specialNotes;
     private String phoneNumber;
+    private long vacancy;
 
     public Shelter(String[] info) {
-        key = info[0];
+        key = parseLong(info[0]);
         name = info[1];
         capacity = info[2];
         restrictions = info[3];
-        longitude = info[4];
-        latitude = info[5];
+        longitude = parseDouble(info[4]);
+        latitude = parseDouble(info[5]);
         address = info[6];
         specialNotes = info[7];
         phoneNumber = info[8];
+    }
+
+    public Shelter() {
+
+    }
+
+    public Shelter (String address, String capacity, double latitude, double longitude, String phoneNumber,
+                        String restrictions, String shelterName, String specialNotes, long key, long vacancy) {
+        this.address = address;
+        this.capacity = capacity;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.phoneNumber = phoneNumber;
+        this.restrictions = restrictions;
+        this.name = shelterName;
+        this.specialNotes = specialNotes;
+        this.key = key;
+        this.vacancy = vacancy;
     }
 
     public Shelter(Parcel parcel) {
         readFromParcel(parcel);
     }
 
-    public String getKey() {
+    public long getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(long key) {
         this.key = key;
     }
 
@@ -56,8 +79,8 @@ public class Shelter implements Parcelable {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
+    public void setCapacity(int capacity) {
+        this.capacity = "" + capacity;
     }
 
     public String getRestrictions() {
@@ -68,19 +91,19 @@ public class Shelter implements Parcelable {
         this.restrictions = restrictions;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
@@ -108,6 +131,14 @@ public class Shelter implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
+    public long getVacancy() {
+        return this.vacancy;
+    }
+
+    public void setVacancy(long n) {
+        this.vacancy = n;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -115,24 +146,24 @@ public class Shelter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(key);
+        parcel.writeString(Long.toString(key));
         parcel.writeString(name);
         parcel.writeString(capacity);
         parcel.writeString(restrictions);
-        parcel.writeString(longitude);
-        parcel.writeString(latitude);
+        parcel.writeString(Double.toString(longitude));
+        parcel.writeString(Double.toString(latitude));
         parcel.writeString(address);
         parcel.writeString(specialNotes);
         parcel.writeString(phoneNumber);
     }
 
     private void readFromParcel(Parcel parcel) {
-        key = parcel.readString();
+        key = parseLong(parcel.readString());
         name = parcel.readString();
         capacity = parcel.readString();
         restrictions = parcel.readString();
-        longitude = parcel.readString();
-        latitude = parcel.readString();
+        longitude = parseDouble(parcel.readString());
+        latitude = parseDouble(parcel.readString());
         address = parcel.readString();
         specialNotes = parcel.readString();
         phoneNumber = parcel.readString();

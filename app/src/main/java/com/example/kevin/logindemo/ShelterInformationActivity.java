@@ -1,14 +1,30 @@
 package com.example.kevin.logindemo;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.w3c.dom.Text;
+
+import static java.lang.Integer.parseInt;
 
 public class ShelterInformationActivity extends AppCompatActivity {
 
@@ -19,15 +35,38 @@ public class ShelterInformationActivity extends AppCompatActivity {
     private TextView latitudeTextView;
     private TextView addressTextView;
     private TextView phoneNumberTextView;
+    private TextView vacancyTextView;
 
+    private EditText inputReserveEditText;
+    private Button reserveButton;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+    private DatabaseReference databaseRef;
+    private DatabaseReference userRef;
+    private ValueEventListener mUserListener;
+    private ValueEventListener mShelterListener;
+
+    int userReserved = 0;
+    long vacants = 0;
+    int rooms = 0;
     private Shelter shelter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_information);
+        FirebaseApp.initializeApp(this);
+        Firebase.setAndroidContext(this);
 
         shelter = getIntent().getExtras().getParcelable("SHELTER");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        String id = user.getEmail().substring(0, user.getEmail().indexOf("@"));
+        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(id);
+        databaseRef = FirebaseDatabase.getInstance().getReference().child("shelters").child("" + shelter.getKey()).child("Vacancy");
+
 
         shelterNameTextView = (TextView) findViewById(R.id.shelter_name_text_view);
         capacityTextView = (TextView) findViewById(R.id.capacity_text_view);
@@ -36,9 +75,96 @@ public class ShelterInformationActivity extends AppCompatActivity {
         latitudeTextView = (TextView) findViewById(R.id.latitude_text_view);
         addressTextView = (TextView) findViewById(R.id.address_text_view);
         phoneNumberTextView = (TextView) findViewById(R.id.phone_number_text_view);
+        vacancyTextView = (TextView) findViewById(R.id.vacancy_text_view);
+
+        inputReserveEditText = (EditText) findViewById(R.id.editText_reserve);
+        reserveButton = (Button) findViewById(R.id.reserve_room_button);
+        reserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(userReserved != 0) {
+                    Snackbar.make(view, "User Already Has Reservations", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    return;
+                }
+
+                String input = inputReserveEditText.getText().toString().trim();
+                if (input.matches("[0-9]+")) {
+                    rooms = parseInt(input);
+                    if (rooms <= 0) {
+                        Snackbar.make(view, "Invalid Input", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        return;
+                    }else if ((vacants - rooms) < 0) {
+                        Snackbar.make(view, "Cannot Overbook Rooms", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        return;
+                    }
+                    userRef.child("roomsReserved").setValue(rooms);
+                    userRef.child("shelterReserved").setValue(shelter.getName());
+                    userRef.child("shelterId").setValue(shelter.getKey());
+                    databaseRef.setValue(vacants - rooms);
+                    inputReserveEditText.setText("");
+                    Snackbar.make(view, "Successful Registration", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(view, "Invalid Input", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
 
         setInformationViews();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Add value event listener to the post
+        // [START post_value_event_listener]
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Users dummy = (Users) dataSnapshot.getValue(Users.class);
+                userReserved = dummy.getRoomsReserved();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        };
+
+        ValueEventListener shelterListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                vacants = (long) dataSnapshot.getValue();
+                vacancyTextView.setText("Vacancy: " + vacants);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        };
+        databaseRef.addValueEventListener(shelterListener);
+        mShelterListener = shelterListener;
+        userRef.addValueEventListener(userListener);
+        mUserListener = userListener;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // Remove post value event listener
+        if (mUserListener != null) {
+            databaseRef.removeEventListener(mShelterListener);
+            userRef.removeEventListener(mUserListener);
+        }
+    }
+
+
 
     private void setInformationViews() {
         shelterNameTextView.setText("Name: " + shelter.getName());

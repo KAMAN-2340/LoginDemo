@@ -45,6 +45,10 @@
         <activity
             android:name=".LandingPageActivity"
             android:label="@string/title_activity_landing_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:label="@string/title_activity_user_info"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
