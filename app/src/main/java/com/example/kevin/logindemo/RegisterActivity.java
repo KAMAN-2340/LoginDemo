@@ -145,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
         userRadioButton.setChecked(false);
     }
 
-    private void createFirebaseUser (String email) {
+    private void createFirebaseUser(String email) {
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://kaman-buzzshelter.firebaseio.com/");
         Users dummy = new Users(email);

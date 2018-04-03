@@ -15,13 +15,13 @@ public class ShelterFilter {
         if (charSequenceString.isEmpty()) {
             filteredShelters = shelters;
         } else {
-            if (charSequenceString.equals("male")) {
+            if ("male".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchMale(shelters);
-            } else if (charSequenceString.equals("female")) {
+            } else if ("female".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchFemale(shelters);
-            } else if (charSequenceString.equals("newborn")){
+            } else if ("newborn".equals(charSequenceString)){
                 filteredShelters = ShelterDatabaseSearcher.searchNewborn(shelters);
-            } else if (charSequenceString.equals("family") || charSequence.equals("families")) {
+            } else if ("family".equals(charSequenceString) || "families".equals(charSequence)) {
                 filteredShelters = ShelterDatabaseSearcher.searchFamily(shelters);
             } else if (charSequenceString.equals("families with newborns")) {
                 filteredShelters = ShelterDatabaseSearcher.searchFamiliesWithNewborns(shelters);
