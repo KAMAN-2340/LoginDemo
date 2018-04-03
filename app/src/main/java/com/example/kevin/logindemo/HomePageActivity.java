@@ -47,7 +47,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         loadShelterDatabase();
 
-        shelterDatabaseRecyclerView = (RecyclerView) findViewById(
+        shelterDatabaseRecyclerView = findViewById(
                 R.id.shelter_database_recycler_view);
         shelterDatabaseRecyclerView.setHasFixedSize(true);
 
@@ -103,6 +103,7 @@ public class HomePageActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.getItem(0)
                 .getActionView();
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);

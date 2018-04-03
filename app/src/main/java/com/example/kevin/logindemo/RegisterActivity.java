@@ -47,11 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
         fireBaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
 
-        emailEditText = (EditText) findViewById(R.id.editText_email);
-        passwordEditText = (EditText) findViewById(R.id.editText_password);
+        emailEditText = findViewById(R.id.editText_email);
+        passwordEditText = findViewById(R.id.editText_password);
 
-        cancelButton = (Button) findViewById(R.id.button_register_cancel);
-        registerButton = (Button) findViewById(R.id.button_register_register);
+        cancelButton = findViewById(R.id.button_register_cancel);
+        registerButton = findViewById(R.id.button_register_register);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        userRadioButton = (RadioButton) findViewById(R.id.radio_button_user);
-        adminRadioButton = (RadioButton) findViewById(R.id.radio_button_admin);
+        userRadioButton = findViewById(R.id.radio_button_user);
+        adminRadioButton = findViewById(R.id.radio_button_admin);
 
         userRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * shelter info activity
+ */
 public class ShelterInformationActivity extends AppCompatActivity {
 
     private TextView shelterNameTextView;
@@ -61,23 +64,24 @@ public class ShelterInformationActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        assert user != null;
         String id = user.getEmail().substring(0, user.getEmail().indexOf("@"));
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child(id);
         databaseRef = FirebaseDatabase.getInstance().getReference().child("shelters").child(""
                 + shelter.getKey()).child("Vacancy");
 
 
-        shelterNameTextView = (TextView) findViewById(R.id.shelter_name_text_view);
-        capacityTextView = (TextView) findViewById(R.id.capacity_text_view);
-        restrictionsTextView = (TextView) findViewById(R.id.restrictions_text_view);
-        longitudeTextView = (TextView) findViewById(R.id.longitude_text_view);
-        latitudeTextView = (TextView) findViewById(R.id.latitude_text_view);
-        addressTextView = (TextView) findViewById(R.id.address_text_view);
-        phoneNumberTextView = (TextView) findViewById(R.id.phone_number_text_view);
-        vacancyTextView = (TextView) findViewById(R.id.vacancy_text_view);
+        shelterNameTextView = findViewById(R.id.shelter_name_text_view);
+        capacityTextView = findViewById(R.id.capacity_text_view);
+        restrictionsTextView = findViewById(R.id.restrictions_text_view);
+        longitudeTextView = findViewById(R.id.longitude_text_view);
+        latitudeTextView = findViewById(R.id.latitude_text_view);
+        addressTextView = findViewById(R.id.address_text_view);
+        phoneNumberTextView = findViewById(R.id.phone_number_text_view);
+        vacancyTextView = findViewById(R.id.vacancy_text_view);
 
-        inputReserveEditText = (EditText) findViewById(R.id.editText_reserve);
-        reserveButton = (Button) findViewById(R.id.reserve_room_button);
+        inputReserveEditText = findViewById(R.id.editText_reserve);
+        reserveButton = findViewById(R.id.reserve_room_button);
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +128,8 @@ public class ShelterInformationActivity extends AppCompatActivity {
         ValueEventListener userListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Users dummy = (Users) dataSnapshot.getValue(Users.class);
+                Users dummy = dataSnapshot.getValue(Users.class);
+                assert dummy != null;
                 userReserved = dummy.getRoomsReserved();
             }
 

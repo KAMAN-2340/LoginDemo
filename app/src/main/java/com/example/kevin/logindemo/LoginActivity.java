@@ -92,10 +92,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }*/
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        cancelButton = (Button) findViewById(R.id.button_cancel);
+        cancelButton = findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         //mProgressView = findViewById(R.id.login_progress);
-        progressBar = (ProgressBar) findViewById(R.id.login_progress);
+        progressBar = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
@@ -390,6 +390,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
 //            showProgress(false);
 
+            //noinspection StatementWithEmptyBody
             if (success) {
                 finish();
             } else {

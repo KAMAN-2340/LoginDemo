@@ -20,6 +20,9 @@ import com.firebase.client.Firebase;
 import com.google.firebase.database.ValueEventListener;
 
 
+/**
+ * user info activity
+ */
 public class UserInfoActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -43,7 +46,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FirebaseApp.initializeApp(this);
@@ -51,20 +54,21 @@ public class UserInfoActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        assert user != null;
         String id = user.getEmail().substring(0, user.getEmail().indexOf("@"));
         database = FirebaseDatabase.getInstance().getReference().child("users").child(id);
         shelterRef = FirebaseDatabase.getInstance().getReference().child("shelters").child(""
                 + shelterID).child("Vacancy");
 
 
-        displayName = (TextView) findViewById(R.id.displayName);
-        displayEmail = (TextView) findViewById(R.id.email);
-        displayPhone = (TextView) findViewById(R.id.phoneNumber);
-        ImageView displayImage = (ImageView) findViewById(R.id.profile);
+        displayName = findViewById(R.id.displayName);
+        displayEmail = findViewById(R.id.email);
+        displayPhone = findViewById(R.id.phoneNumber);
+        ImageView displayImage = findViewById(R.id.profile);
         displayName.setText(user.getEmail());
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +98,8 @@ public class UserInfoActivity extends AppCompatActivity {
         ValueEventListener userListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Users dummy = (Users) dataSnapshot.getValue(Users.class);
+                Users dummy = dataSnapshot.getValue(Users.class);
+                assert dummy != null;
                 shelterID = dummy.getShelterId();
                 rooms = dummy.getRoomsReserved();
                 shelterName = dummy.getShelterReserved();

@@ -30,6 +30,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * shelter map activity
+ */
 public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "ShelterMapActivity";
@@ -189,6 +192,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.getItem(0)
                 .getActionView();
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
