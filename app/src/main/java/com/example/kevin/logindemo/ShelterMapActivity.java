@@ -35,7 +35,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     private static final String TAG = "ShelterMapActivity";
 
     private static final String FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final String COARSE_LOCATION = android.Manifest.
+            permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 14f;
 
@@ -83,11 +84,14 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location");
                             Location currentLocation = (Location) task.getResult();
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                            moveCamera(new LatLng(currentLocation.getLatitude(),
+                                            currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(ShelterMapActivity.this, "unable to get current locaiton", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ShelterMapActivity.this,
+                                    "unable to get current locaiton",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -98,7 +102,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng:" + latLng.longitude);
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude
+                + ", lng:" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -125,7 +130,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
@@ -161,7 +167,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         //getDeviceLoaction();
 
         // the emulator's location is GooglePlex in CA, manually setting to Atlanta
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490, -84.3880), DEFAULT_ZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490,
+                -84.3880), DEFAULT_ZOOM));
     }
 
     private void loadShelters(List<Shelter> shelters) {
@@ -170,7 +177,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
             mMap.clear();
             for (Shelter sh : shelters) {
                 LatLng loc = new LatLng(sh.getLatitude(), sh.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(loc).title(sh.getName()).snippet(sh.getAddress()));
+                mMap.addMarker(new MarkerOptions().
+                        position(loc).title(sh.getName()).snippet(sh.getAddress()));
             }
         }
     }

@@ -24,6 +24,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+ /**
+ * LandingPageActivity is the welcome screen
+ */
 public class LandingPageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,7 +69,8 @@ public class LandingPageActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -79,7 +83,8 @@ public class LandingPageActivity extends AppCompatActivity
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LandingPageActivity.this, ShelterMapActivity.class);
+                Intent intent = new Intent(LandingPageActivity.this,
+                        ShelterMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -143,10 +148,16 @@ public class LandingPageActivity extends AppCompatActivity
         return true;
     }
 
+     /**
+      * checks if google services are up
+      *
+      * @return
+      */
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
 
-        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(LandingPageActivity.this);
+        int available = GoogleApiAvailability.
+                getInstance().isGooglePlayServicesAvailable(LandingPageActivity.this);
 
         if(available == ConnectionResult.SUCCESS){
             //everything is fine and the user can make map requests
@@ -156,10 +167,13 @@ public class LandingPageActivity extends AppCompatActivity
         else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
             //an error occured but we can resolve it
             Log.d(TAG, "isServicesOK: an error occured but we can fix it");
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(LandingPageActivity.this, available, ERROR_DIALOG_REQUEST);
+            Dialog dialog = GoogleApiAvailability.
+                    getInstance().getErrorDialog(LandingPageActivity.this,
+                    available, ERROR_DIALOG_REQUEST);
             dialog.show();
         }else{
-            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You can't make map requests",
+                    Toast.LENGTH_SHORT).show();
         }
         return false;
     }

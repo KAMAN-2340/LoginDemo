@@ -39,11 +39,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * logs in
+     *
+     * @param view
+     */
     public void loginClicked(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * registers clicking
+     *
+     * @param view
+     */
     public void registerClicked(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

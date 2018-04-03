@@ -1,7 +1,5 @@
 package com.example.kevin.logindemo;
 
-import java.util.HashMap;
-
 /**
  * Created by Nick on 2/12/2018.
  */

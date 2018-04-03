@@ -17,11 +17,27 @@ public abstract class Person {
 
     }
 
+    /**
+     * creates person
+     *
+     * @param login_name
+     * @param password
+     */
     public Person (String login_name, String password) {
         this.login_name = login_name;
         this.password = password;
     }
 
+    /**
+     * creates a person
+     *
+     * @param login_name
+     * @param password
+     * @param first_name
+     * @param last_name
+     * @param gender
+     * @param contact_info
+     */
     public Person (String login_name, String password, String first_name, String last_name,
                    int gender, String contact_info) {
         this.login_name = login_name;

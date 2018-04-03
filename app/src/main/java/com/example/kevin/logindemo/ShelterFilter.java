@@ -23,16 +23,17 @@ public class ShelterFilter {
                 filteredShelters = ShelterDatabaseSearcher.searchNewborn(shelters);
             } else if ("family".equals(charSequenceString) || "families".equals(charSequence)) {
                 filteredShelters = ShelterDatabaseSearcher.searchFamily(shelters);
-            } else if (charSequenceString.equals("families with newborns")) {
+            } else if ("families with newborns".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchFamiliesWithNewborns(shelters);
-            } else if (charSequenceString.equals("children")) {
+            } else if ("children".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchChildren(shelters);
-            } else if (charSequenceString.equals("young adults")) {
+            } else if ("young adults".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchYoungAdults(shelters);
-            } else if (charSequenceString.equals("anyone")) {
+            } else if ("anyone".equals(charSequenceString)) {
                 filteredShelters = ShelterDatabaseSearcher.searchAnyone(shelters);
             } else {
-                filteredShelters = ShelterDatabaseSearcher.searchByName(shelters, charSequenceString);
+                filteredShelters = ShelterDatabaseSearcher.searchByName(shelters,
+                        charSequenceString);
             }
         }
         return filteredShelters;

@@ -18,6 +18,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * registers screen for registering users
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private Button cancelButton;
@@ -82,16 +85,26 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * registers cancel being clicked
+     *
+     * @param view
+     */
     public void registerCancelClicked(View view) {
         finish();
     }
 
+    /**
+     * registers clicked mouse button
+     *
+     * @param view
+     */
     public void registerClicked(View view) {
         // Add to database and go to log-in
         final String email = emailEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
-        if (email.length() == 0 || password.length() == 0) {
-            Toast.makeText(RegisterActivity.this, (email.length() == 0 ? "email" : "password")
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, (email.isEmpty() ? "email" : "password")
                     + " is a required field", Toast.LENGTH_SHORT).show();
         } else {
             progressDialog.setMessage("Registering User...");
@@ -119,32 +132,32 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         }
     }
-           /*
-            if (userRadioButton.isChecked()) {
-                LoginActivity.users.add(email, password);
-                Toast.makeText(RegisterActivity.this, "Register "
-                                + "Successfully as " + userType + ".",
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                LoginActivity.admins.add(email, password);
-                Toast.makeText(RegisterActivity.this, "Register "
-                                + "Successfully as " + userType + ".",
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }*/
 
+    /**
+     * registers mouse button being clicked on user button
+     *
+     * @param view
+     */
     private void userButtonClicked(View view) {
         userRadioButton.setChecked(true);
         adminRadioButton.setChecked(false);
     }
 
+    /**
+     * registers mouse button being clicked on admin button
+     *
+     * @param view
+     */
     private void adminButtonClicked(View view) {
         adminRadioButton.setChecked(true);
         userRadioButton.setChecked(false);
     }
 
+    /**
+     * creates firebase user
+     *
+     * @param email
+     */
     private void createFirebaseUser(String email) {
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://kaman-buzzshelter.firebaseio.com/");

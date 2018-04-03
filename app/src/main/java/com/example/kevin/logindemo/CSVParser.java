@@ -1,13 +1,7 @@
 package com.example.kevin.logindemo;
 
-import android.util.Log;
-
-import com.firebase.client.Firebase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.BufferedReader;
@@ -27,16 +21,34 @@ public class CSVParser {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference().child("shelters");
 
-    public CSVParser () {};
+     /**
+     * parses CSV file
+     */
+    public CSVParser () {}
 
+     /**
+     * parses CSV file
+     *
+     * @param inputStream
+     */
     public CSVParser(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
+     /**
+     * parses CSV file
+     *
+     * @param list
+     */
     public CSVParser(ArrayList<Shelter> list) {
         this.shelterArrayList = list;
     }
 
+     /**
+     * returns a list of shelters
+     *
+     * @return
+     */
     public ArrayList getShelters() {
         ArrayList<Shelter> shelterArrayList = new ArrayList<>();
         try {
@@ -59,10 +71,20 @@ public class CSVParser {
         return shelterArrayList;
     }
 
+     /**
+     * sets shelter
+     *
+     * @param list
+     */
     public void setShelter(ArrayList<Shelter> list) {
         this.shelterArrayList = list;
     }
 
+     /**
+     * gets the firebase shelter
+     *
+     * @return the firebase shelter
+     */
     public ArrayList<Shelter> returnFirebaseShelter() {
         return this.shelterArrayList;
     }

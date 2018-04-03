@@ -3,7 +3,6 @@ package com.example.kevin.logindemo;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,14 @@ import java.util.List;
  * Created by Nick on 2/26/2018.
  */
 
-public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder> implements Filterable{
+public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder>
+        implements Filterable{
 
-    private List<Shelter> shelters;
+    private final List<Shelter> shelters;
     protected List<Shelter> filteredShelters;
-    private Context context;
+    private final Context context;
 
-    private final static String TAG = "ShelterDatabaseAdapter";
+    private static final String TAG = "ShelterDatabaseAdapter";
 
     @Override
     public Filter getFilter() {
@@ -45,11 +45,16 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
         };
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnLongClickListener {
 
         public ShelterItemClickListener shelterItemClickListener;
         public TextView mTextView;
 
+        /**
+         *
+         * @param v
+         */
         public ViewHolder(TextView v) {
             super(v);
             mTextView = v;
@@ -57,6 +62,11 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
             v.setOnLongClickListener(this);
         }
 
+        /**
+         * sets the shelter item click listener
+         *
+         * @param shelterItemClickListener the listener
+         */
         public void setShelterItemClickListener(ShelterItemClickListener shelterItemClickListener) {
             this.shelterItemClickListener = shelterItemClickListener;
         }
@@ -73,6 +83,13 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
         }
     }
 
+    /**
+     * adapts shelter database
+     *
+     * @param shelters list of shelters
+     * @param filteredShelters list of filtered shelters
+     * @param context the current settings
+     */
     public ShelterDatabaseAdapter(ArrayList shelters, ArrayList filteredShelters, Context context) {
         this.shelters = shelters;
         this.filteredShelters = filteredShelters;

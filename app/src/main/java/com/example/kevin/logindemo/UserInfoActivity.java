@@ -53,7 +53,8 @@ public class UserInfoActivity extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
         String id = user.getEmail().substring(0, user.getEmail().indexOf("@"));
         database = FirebaseDatabase.getInstance().getReference().child("users").child(id);
-        shelterRef = FirebaseDatabase.getInstance().getReference().child("shelters").child("" + shelterID).child("Vacancy");
+        shelterRef = FirebaseDatabase.getInstance().getReference().child("shelters").child(""
+                + shelterID).child("Vacancy");
 
 
         displayName = (TextView) findViewById(R.id.displayName);
@@ -67,10 +68,10 @@ public class UserInfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!shelterName.equals("none") && rooms == 0) {
+                if (!"none".equals(shelterName) && rooms == 0) {
                     database.child("shelterReserved").setValue("none");
                 }
-                if (rooms == 0 || shelterName.equals("none")) {
+                if (rooms == 0 || "none".equals(shelterName)) {
                     Snackbar.make(view, "No Current Reservations", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     return;

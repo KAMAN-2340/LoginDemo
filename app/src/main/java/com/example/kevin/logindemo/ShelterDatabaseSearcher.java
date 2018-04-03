@@ -9,6 +9,11 @@ import java.util.List;
 
 public class ShelterDatabaseSearcher {
 
+    /**
+     * 
+     * @param shelters
+     * @return
+     */
     public static List<Shelter> searchMale(List<Shelter> shelters) {
         ArrayList<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
@@ -18,7 +23,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -36,7 +41,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -52,7 +57,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -68,7 +73,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -84,7 +89,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -100,7 +105,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -116,7 +121,7 @@ public class ShelterDatabaseSearcher {
             }
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }
@@ -129,7 +134,7 @@ public class ShelterDatabaseSearcher {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("anyone")) {
                 newFilteredList.add(sh);
-            } else if (restrictions.length() == 0) {
+            } else if (restrictions.isEmpty()) {
                 newFilteredList.add(sh);
             }
         }

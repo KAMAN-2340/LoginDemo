@@ -22,8 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import static java.lang.Integer.parseInt;
 
 public class ShelterInformationActivity extends AppCompatActivity {
@@ -65,7 +63,8 @@ public class ShelterInformationActivity extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
         String id = user.getEmail().substring(0, user.getEmail().indexOf("@"));
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child(id);
-        databaseRef = FirebaseDatabase.getInstance().getReference().child("shelters").child("" + shelter.getKey()).child("Vacancy");
+        databaseRef = FirebaseDatabase.getInstance().getReference().child("shelters").child(""
+                + shelter.getKey()).child("Vacancy");
 
 
         shelterNameTextView = (TextView) findViewById(R.id.shelter_name_text_view);
@@ -185,7 +184,8 @@ public class ShelterInformationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            Intent intent = new Intent(this,
+                    MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             return true;
         } else {

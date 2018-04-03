@@ -2,16 +2,13 @@ package com.example.kevin.logindemo;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
@@ -22,9 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+ /**
+ * Homepage Activity holds list of shelters
+ */
 public class HomePageActivity extends AppCompatActivity {
 
     private RecyclerView shelterDatabaseRecyclerView;
@@ -48,7 +47,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         loadShelterDatabase();
 
-        shelterDatabaseRecyclerView = (RecyclerView) findViewById(R.id.shelter_database_recycler_view);
+        shelterDatabaseRecyclerView = (RecyclerView) findViewById(
+                R.id.shelter_database_recycler_view);
         shelterDatabaseRecyclerView.setHasFixedSize(true);
 
         shelterDatabaseLayoutManager = new LinearLayoutManager(this);
@@ -65,6 +65,9 @@ public class HomePageActivity extends AppCompatActivity {
         shelters = csvParser.getShelters();
     }
 
+     /**
+     *  gets firebase shelter
+     */
     public void getFirebaseShelter() {
         databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
