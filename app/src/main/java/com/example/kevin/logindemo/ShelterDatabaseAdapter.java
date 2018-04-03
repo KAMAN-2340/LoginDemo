@@ -3,6 +3,7 @@ package com.example.kevin.logindemo;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,38 +21,17 @@ import java.util.List;
 public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder> implements Filterable{
 
     private List<Shelter> shelters;
-    private List<Shelter> filteredShelters;
+    protected List<Shelter> filteredShelters;
     private Context context;
+
+    private final static String TAG = "ShelterDatabaseAdapter";
 
     @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String charSequenceString = charSequence.toString().toLowerCase();
-                if (charSequenceString.isEmpty()) {
-                    filteredShelters = shelters;
-                } else {
-                    if (charSequenceString.equals("male")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchMale(shelters);
-                    } else if (charSequenceString.equals("female")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchFemale(shelters);
-                    } else if (charSequenceString.equals("newborn")){
-                        filteredShelters = ShelterDatabaseSearcher.searchNewborn(shelters);
-                    } else if (charSequenceString.equals("family") || charSequence.equals("families")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchFamily(shelters);
-                    } else if (charSequenceString.equals("families with newborns")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchFamiliesWithNewborns(shelters);
-                    } else if (charSequenceString.equals("children")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchChildren(shelters);
-                    } else if (charSequenceString.equals("young adults")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchYoungAdults(shelters);
-                    } else if (charSequenceString.equals("anyone")) {
-                        filteredShelters = ShelterDatabaseSearcher.searchAnyone(shelters);
-                    } else {
-                        filteredShelters = ShelterDatabaseSearcher.searchByName(shelters, charSequenceString);
-                    }
-                }
+                filteredShelters = ShelterFilter.filter(charSequence, shelters);
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredShelters;
                 return filterResults;

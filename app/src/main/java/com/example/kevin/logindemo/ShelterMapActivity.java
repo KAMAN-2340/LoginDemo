@@ -1,5 +1,7 @@
 package com.example.kevin.logindemo;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -7,7 +9,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -23,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -35,6 +41,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
 
     private Boolean mLocationPermissionsGranted = false;
 
+    private SearchView searchView;
+    private ShelterDatabaseAdapter shelterDatabaseAdapter;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private ArrayList<Shelter> shelters = new ArrayList<>();
@@ -148,15 +156,57 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
 
+        loadShelters(shelters);
+
+        //getDeviceLoaction();
+
+        // the emulator's location is GooglePlex in CA, manually setting to Atlanta
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490, -84.3880), DEFAULT_ZOOM));
+    }
+
+    private void loadShelters(List<Shelter> shelters) {
+        Log.d(TAG, "loadShelters: loading shelters");
         if (mLocationPermissionsGranted) {
+            mMap.clear();
             for (Shelter sh : shelters) {
                 LatLng loc = new LatLng(sh.getLatitude(), sh.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(loc).title(sh.getName()).snippet(sh.getAddress()));
             }
-            //getDeviceLoaction();
+        }
+    }
 
-            // the emulator's location is GooglePlex in CA, manually setting to Atlanta
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490, -84.3880), DEFAULT_ZOOM));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home_page, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.getItem(0)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadShelters(ShelterFilter.filter(query, shelters));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                loadShelters(ShelterFilter.filter(query, shelters));
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 }
