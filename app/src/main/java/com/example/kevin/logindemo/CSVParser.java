@@ -14,11 +14,11 @@ import java.util.ArrayList;
  * Created by Nick on 2/26/2018.
  */
 
-public class CSVParser {
+class CSVParser {
 
     private InputStream inputStream;
     private ArrayList<Shelter> shelterArrayList;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference().child("shelters");
 
      /**

@@ -72,10 +72,10 @@ public class UserInfoActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!"none".equals(shelterName) && rooms == 0) {
+                if (!"none".equals(shelterName) && (rooms == 0)) {
                     database.child("shelterReserved").setValue("none");
                 }
-                if (rooms == 0 || "none".equals(shelterName)) {
+                if ((rooms == 0) || "none".equals(shelterName)) {
                     Snackbar.make(view, "No Current Reservations", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     return;

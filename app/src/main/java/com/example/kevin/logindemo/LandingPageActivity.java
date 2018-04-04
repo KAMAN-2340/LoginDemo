@@ -155,7 +155,7 @@ public class LandingPageActivity extends AppCompatActivity
       *
       * @return
       */
-    public boolean isServicesOK(){
+     private boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
 
         int available = GoogleApiAvailability.

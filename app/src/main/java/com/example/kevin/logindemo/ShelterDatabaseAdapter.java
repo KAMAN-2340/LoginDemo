@@ -21,7 +21,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
         implements Filterable{
 
     private final List<Shelter> shelters;
-    protected List<Shelter> filteredShelters;
+    private List<Shelter> filteredShelters;
     private final Context context;
 
     private static final String TAG = "ShelterDatabaseAdapter";
@@ -37,9 +37,10 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
                 return filterResults;
             }
 
+            @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredShelters =(ArrayList<Shelter>) filterResults.values;
+                filteredShelters = (ArrayList<Shelter>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
@@ -90,6 +91,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
      * @param filteredShelters list of filtered shelters
      * @param context the current settings
      */
+    @SuppressWarnings("unchecked")
     public ShelterDatabaseAdapter(ArrayList shelters, ArrayList filteredShelters, Context context) {
         this.shelters = shelters;
         this.filteredShelters = filteredShelters;

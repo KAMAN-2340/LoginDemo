@@ -58,10 +58,10 @@ public class HomePageActivity extends AppCompatActivity {
         shelterDatabaseRecyclerView.setAdapter(shelterDatabaseAdapter);
     }
 
+     @SuppressWarnings("unchecked")
     private void loadShelterDatabase() {
         InputStream inputStream = getResources().openRawResource(R.raw.homeless_shelter_database);
         CSVParser csvParser = new CSVParser(inputStream);
-        //getFirebaseShelter();
         shelters = csvParser.getShelters();
     }
 

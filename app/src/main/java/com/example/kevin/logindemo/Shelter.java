@@ -83,7 +83,7 @@ public class Shelter implements Parcelable {
      *
      * @param parcel the parcel
      */
-    public Shelter(Parcel parcel) {
+    private Shelter(Parcel parcel) {
         readFromParcel(parcel);
     }
 

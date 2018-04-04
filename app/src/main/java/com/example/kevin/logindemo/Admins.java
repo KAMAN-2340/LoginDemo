@@ -6,9 +6,9 @@ import java.util.HashMap;
  * Created by Nick on 2/18/2018.
  */
 
-public class Admins extends Person{
+class Admins extends Person{
 
-    HashMap<String, String> admins;
+    private HashMap<String, String> admins;
 
      /**
      * Creates an admin

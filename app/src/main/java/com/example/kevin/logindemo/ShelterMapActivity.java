@@ -60,6 +60,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         getLocationPermission();
     }
 
+    @SuppressWarnings("unchecked")
     private void loadShelterDatabase() {
         InputStream inputStream = getResources().openRawResource(R.raw.homeless_shelter_database);
         CSVParser csvParser = new CSVParser(inputStream);
@@ -73,6 +74,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment.getMapAsync(ShelterMapActivity.this);
     }
 
+    @SuppressWarnings("unchecked")
     private void getDeviceLoaction() {
         Log.d(TAG, "getDeviceLoaction: getting the device's current location");
 

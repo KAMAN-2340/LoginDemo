@@ -4,7 +4,7 @@ package com.example.kevin.logindemo;
  * Created by Kevin on 3/23/2018.
  */
 
-public abstract class Person {
+abstract class Person {
     private String first_name;
     private String last_name;
     private String login_name;
@@ -13,7 +13,7 @@ public abstract class Person {
     private int gender;
     private String contact_info;
 
-    public Person(){
+    Person(){
 
     }
 
@@ -23,7 +23,7 @@ public abstract class Person {
      * @param login_name
      * @param password
      */
-    public Person (String login_name, String password) {
+    Person(String login_name, String password) {
         this.login_name = login_name;
         this.password = password;
     }
@@ -38,8 +38,8 @@ public abstract class Person {
      * @param gender
      * @param contact_info
      */
-    public Person (String login_name, String password, String first_name, String last_name,
-                   int gender, String contact_info) {
+    Person(String login_name, String password, String first_name, String last_name,
+           int gender, String contact_info) {
         this.login_name = login_name;
         this.password = password;
         this.first_name = first_name;
