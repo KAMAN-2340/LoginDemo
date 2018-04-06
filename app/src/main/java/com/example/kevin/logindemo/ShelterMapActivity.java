@@ -30,12 +30,16 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * shelter map activity
+ */
 public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "ShelterMapActivity";
 
     private static final String FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final String COARSE_LOCATION = android.Manifest.
+            permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 14f;
 
@@ -45,7 +49,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     private ShelterDatabaseAdapter shelterDatabaseAdapter;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private ArrayList<Shelter> shelters = new ArrayList<>();
+    private List<Shelter> shelters = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         getLocationPermission();
     }
 
+    @SuppressWarnings("unchecked")
     private void loadShelterDatabase() {
         InputStream inputStream = getResources().openRawResource(R.raw.homeless_shelter_database);
         CSVParser csvParser = new CSVParser(inputStream);
@@ -69,8 +74,9 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         mapFragment.getMapAsync(ShelterMapActivity.this);
     }
 
-    private void getDeviceLoaction() {
-        Log.d(TAG, "getDeviceLoaction: getting the device's current location");
+    @SuppressWarnings("unchecked")
+    private void getDeviceLocation() { //Never used, typo in name
+        Log.d(TAG, "getDeviceLoacation: getting the device's current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -83,22 +89,26 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location");
                             Location currentLocation = (Location) task.getResult();
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                            moveCamera(new LatLng(currentLocation.getLatitude(),
+                                            currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(ShelterMapActivity.this, "unable to get current locaiton", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ShelterMapActivity.this,
+                                    "unable to get current location",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         } catch (SecurityException e) {
-            Log.e(TAG, "getDeviceLoaction: " + e.getMessage());
+            Log.e(TAG, "getDeviceLocation: " + e.getMessage());
         }
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
-        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng:" + latLng.longitude);
+        Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude
+                + ", lng:" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -125,15 +135,16 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
         switch(requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
@@ -145,6 +156,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                     initMap();
                 }
             }
+            //break?
             default:
                 Log.e(TAG, "Invalid Permission Request Code");
         }
@@ -158,19 +170,21 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
 
         loadShelters(shelters);
 
-        //getDeviceLoaction();
+        //getDeviceLocation();
 
         // the emulator's location is GooglePlex in CA, manually setting to Atlanta
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490, -84.3880), DEFAULT_ZOOM));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490,
+                -84.3880), DEFAULT_ZOOM));
     }
 
-    private void loadShelters(List<Shelter> shelters) {
+    private void loadShelters(Iterable<Shelter> shelters) {
         Log.d(TAG, "loadShelters: loading shelters");
         if (mLocationPermissionsGranted) {
             mMap.clear();
             for (Shelter sh : shelters) {
                 LatLng loc = new LatLng(sh.getLatitude(), sh.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(loc).title(sh.getName()).snippet(sh.getAddress()));
+                mMap.addMarker(new MarkerOptions().
+                        position(loc).title(sh.getName()).snippet(sh.getAddress()));
             }
         }
     }
@@ -181,6 +195,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.getItem(0)
                 .getActionView();
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -203,10 +218,6 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
+        return item.getItemId() == R.id.action_search || super.onOptionsItemSelected(item);
     }
 }

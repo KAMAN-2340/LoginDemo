@@ -1,13 +1,7 @@
 package com.example.kevin.logindemo;
 
-import android.util.Log;
-
-import com.firebase.client.Firebase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.BufferedReader;
@@ -20,23 +14,41 @@ import java.util.ArrayList;
  * Created by Nick on 2/26/2018.
  */
 
-public class CSVParser {
+class CSVParser {
 
     private InputStream inputStream;
     private ArrayList<Shelter> shelterArrayList;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference().child("shelters");
 
-    public CSVParser () {};
+     /**
+     * parses CSV file
+     */
+    public CSVParser () {}
 
+     /**
+     * parses CSV file
+     *
+     * @param inputStream the input
+     */
     public CSVParser(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
+     /**
+     * parses CSV file
+     *
+     * @param list
+     */
     public CSVParser(ArrayList<Shelter> list) {
         this.shelterArrayList = list;
     }
 
+     /**
+     * returns a list of shelters
+     *
+     * @return the list of available shelters
+     */
     public ArrayList getShelters() {
         ArrayList<Shelter> shelterArrayList = new ArrayList<>();
         try {
@@ -47,22 +59,32 @@ public class CSVParser {
                     shelterArrayList.add(new Shelter(line.split(",")));
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         } finally {
             try {
                 inputStream.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
 
             }
         }
         return shelterArrayList;
     }
 
+     /**
+     * sets shelter
+     *
+     * @param list the list of shelters to set
+     */
     public void setShelter(ArrayList<Shelter> list) {
         this.shelterArrayList = list;
     }
 
+     /**
+     * gets the firebase shelter
+     *
+     * @return the firebase shelter
+     */
     public ArrayList<Shelter> returnFirebaseShelter() {
         return this.shelterArrayList;
     }

@@ -2,16 +2,13 @@ package com.example.kevin.logindemo;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
@@ -22,9 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Homepage Activity holds list of shelters
+ */
 public class HomePageActivity extends AppCompatActivity {
 
     private RecyclerView shelterDatabaseRecyclerView;
@@ -35,8 +35,8 @@ public class HomePageActivity extends AppCompatActivity {
     private DatabaseReference databaseRef;
     //private CSVParser csvParser = new CSVParser();
 
-    ArrayList<Shelter> shelters = new ArrayList<>();
-    final ArrayList<Shelter> tempList = new ArrayList<>();
+    private ArrayList<Shelter> shelters = new ArrayList<>();
+    private final List<Shelter> tempList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         loadShelterDatabase();
 
-        shelterDatabaseRecyclerView = (RecyclerView) findViewById(R.id.shelter_database_recycler_view);
+        shelterDatabaseRecyclerView = findViewById(
+                R.id.shelter_database_recycler_view);
         shelterDatabaseRecyclerView.setHasFixedSize(true);
 
         shelterDatabaseLayoutManager = new LinearLayoutManager(this);
@@ -58,13 +59,16 @@ public class HomePageActivity extends AppCompatActivity {
         shelterDatabaseRecyclerView.setAdapter(shelterDatabaseAdapter);
     }
 
+     @SuppressWarnings("unchecked")
     private void loadShelterDatabase() {
         InputStream inputStream = getResources().openRawResource(R.raw.homeless_shelter_database);
         CSVParser csvParser = new CSVParser(inputStream);
-        //getFirebaseShelter();
         shelters = csvParser.getShelters();
     }
 
+     /**
+     *  gets firebase shelter
+     */
     public void getFirebaseShelter() {
         databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,6 +104,7 @@ public class HomePageActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.getItem(0)
                 .getActionView();
+        assert searchManager != null;
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -122,11 +127,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
+        return item.getItemId() == R.id.action_search || super.onOptionsItemSelected(item);
     }
 
 }

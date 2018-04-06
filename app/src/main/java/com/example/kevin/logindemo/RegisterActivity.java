@@ -18,6 +18,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * registers screen for registering users
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private Button cancelButton;
@@ -44,11 +47,11 @@ public class RegisterActivity extends AppCompatActivity {
         fireBaseAuth = FirebaseAuth.getInstance();
         FirebaseApp.initializeApp(this);
 
-        emailEditText = (EditText) findViewById(R.id.editText_email);
-        passwordEditText = (EditText) findViewById(R.id.editText_password);
+        emailEditText = findViewById(R.id.editText_email);
+        passwordEditText = findViewById(R.id.editText_password);
 
-        cancelButton = (Button) findViewById(R.id.button_register_cancel);
-        registerButton = (Button) findViewById(R.id.button_register_register);
+        cancelButton = findViewById(R.id.button_register_cancel);
+        registerButton = findViewById(R.id.button_register_register);
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        userRadioButton = (RadioButton) findViewById(R.id.radio_button_user);
-        adminRadioButton = (RadioButton) findViewById(R.id.radio_button_admin);
+        userRadioButton = findViewById(R.id.radio_button_user);
+        adminRadioButton = findViewById(R.id.radio_button_admin);
 
         userRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,16 +85,26 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * registers cancel being clicked
+     *
+     * @param view the view
+     */
     public void registerCancelClicked(View view) {
         finish();
     }
 
+    /**
+     * registers clicked mouse button
+     *
+     * @param view the view
+     */
     public void registerClicked(View view) {
         // Add to database and go to log-in
         final String email = emailEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
-        if (email.length() == 0 || password.length() == 0) {
-            Toast.makeText(RegisterActivity.this, (email.length() == 0 ? "email" : "password")
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, (email.isEmpty() ? "email" : "password")
                     + " is a required field", Toast.LENGTH_SHORT).show();
         } else {
             progressDialog.setMessage("Registering User...");
@@ -119,39 +132,39 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         }
     }
-           /*
-            if (userRadioButton.isChecked()) {
-                LoginActivity.users.add(email, password);
-                Toast.makeText(RegisterActivity.this, "Register "
-                                + "Successfully as " + userType + ".",
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                LoginActivity.admins.add(email, password);
-                Toast.makeText(RegisterActivity.this, "Register "
-                                + "Successfully as " + userType + ".",
-                        Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }*/
 
+    /**
+     * registers mouse button being clicked on user button
+     *
+     * @param view the view
+     */
     private void userButtonClicked(View view) {
         userRadioButton.setChecked(true);
         adminRadioButton.setChecked(false);
     }
 
+    /**
+     * registers mouse button being clicked on admin button
+     *
+     * @param view the view
+     */
     private void adminButtonClicked(View view) {
         adminRadioButton.setChecked(true);
         userRadioButton.setChecked(false);
     }
 
-    private void createFirebaseUser (String email) {
+    /**
+     * creates firebase user
+     *
+     * @param email the email of the user
+     */
+    private void createFirebaseUser(String email) {
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://kaman-buzzshelter.firebaseio.com/");
         Users dummy = new Users(email);
         String id = email.substring(0, email.indexOf("@"));
         Firebase mRefChild = mRef.child("users");
-        Firebase mRefChildd = mRefChild.child(id);
+        Firebase mRefChildd = mRefChild.child(id); //typo in child
         mRefChildd.setValue(dummy);
 
     }

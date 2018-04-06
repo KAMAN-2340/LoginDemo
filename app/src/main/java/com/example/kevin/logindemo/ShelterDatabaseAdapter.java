@@ -3,7 +3,6 @@ package com.example.kevin.logindemo;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,14 @@ import java.util.List;
  * Created by Nick on 2/26/2018.
  */
 
-public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder> implements Filterable{
+public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder>
+        implements Filterable{
 
-    private List<Shelter> shelters;
-    protected List<Shelter> filteredShelters;
-    private Context context;
+    private final List<Shelter> shelters;
+    private List<Shelter> filteredShelters;
+    private final Context context;
 
-    private final static String TAG = "ShelterDatabaseAdapter";
+    private static final String TAG = "ShelterDatabaseAdapter";
 
     @Override
     public Filter getFilter() {
@@ -37,19 +37,25 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
                 return filterResults;
             }
 
+            @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredShelters =(ArrayList<Shelter>) filterResults.values;
+                filteredShelters = (ArrayList<Shelter>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnLongClickListener {
 
         public ShelterItemClickListener shelterItemClickListener;
-        public TextView mTextView;
+        public final TextView mTextView;
 
+        /**
+         *
+         * @param v
+         */
         public ViewHolder(TextView v) {
             super(v);
             mTextView = v;
@@ -57,6 +63,11 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
             v.setOnLongClickListener(this);
         }
 
+        /**
+         * sets the shelter item click listener
+         *
+         * @param shelterItemClickListener the listener
+         */
         public void setShelterItemClickListener(ShelterItemClickListener shelterItemClickListener) {
             this.shelterItemClickListener = shelterItemClickListener;
         }
@@ -73,7 +84,15 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
         }
     }
 
-    public ShelterDatabaseAdapter(ArrayList shelters, ArrayList filteredShelters, Context context) {
+    /**
+     * adapts shelter database
+     *
+     * @param shelters list of shelters
+     * @param filteredShelters list of filtered shelters
+     * @param context the current settings
+     */
+    @SuppressWarnings("unchecked")
+    public ShelterDatabaseAdapter(List shelters, List filteredShelters, Context context) {
         this.shelters = shelters;
         this.filteredShelters = filteredShelters;
         this.context = context;
@@ -84,8 +103,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
                                                    int viewType) {
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shelter_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     @Override
