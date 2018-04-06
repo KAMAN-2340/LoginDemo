@@ -110,31 +110,32 @@ public class ShelterDatabaseSearcherTests {
     }
 
 
-//    @Test(timeout = TIMEOUT)
-//    public void searchForFamilyEmpty() {
-//    assertEquals(sellAnswer,
-//                PatternMatching.bruteForce(sell, sellText, comparator));
-//        assertTrue("Did not use the comparator.", comparator.getCount() != 0);
-//        assertTrue("Comparison count was " + comparator.getCount()
-//                + ". Should be 44.", comparator.getCount() == 44);
-//    }
-//
-//    @Test(timeout = TIMEOUT)
-//    public void searchForFamilyContains() {
-//    assertEquals(sellAnswer,
-//                PatternMatching.bruteForce(sell, sellText, comparator));
-//        assertTrue("Did not use the comparator.", comparator.getCount() != 0);
-//        assertTrue("Comparison count was " + comparator.getCount()
-//                + ". Should be 44.", comparator.getCount() == 44);
-//    }
-//
-//    @Test(timeout = TIMEOUT)
-//    public void searchForFamilyDoesntContain() {
-//    assertEquals(sellAnswer,
-//                PatternMatching.bruteForce(sell, sellText, comparator));
-//        assertTrue("Did not use the comparator.", comparator.getCount() != 0);
-//        assertTrue("Comparison count was " + comparator.getCount()
-//                + ". Should be 44.", comparator.getCount() == 44);
-//    }
+    @Test(timeout = TIMEOUT)
+    public void searchForFamilyEmpty() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFamily(emptyList);
+        assertEquals(0, filteredList.size());
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void searchForFamilyContains() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFamily(shelterList);
+        assertEquals(4, filteredList.size());
+
+        assertEquals(0, filteredList.get(0).getKey());
+        assertEquals(1, filteredList.get(1).getKey());
+        assertEquals(7, filteredList.get(2).getKey());
+        assertEquals(8, filteredList.get(3).getKey());
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void searchForFamilyDoesntContain() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFamily(shelterList);
+        boolean removed = shelterList.remove(filteredList.get(0));
+        assertTrue(removed);
+        assertFalse(shelterList.remove(filteredList.get(0)));
+    }
 
 }
