@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Nick on 3/5/2018.
  */
 
-class ShelterDatabaseSearcher {
+public class ShelterDatabaseSearcher {
 
     /**
      * returns list of shelters that allow men
@@ -149,15 +149,17 @@ class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchYoungAdults(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (restrictions.contains("young adults")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (restrictions.contains("young adults")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
