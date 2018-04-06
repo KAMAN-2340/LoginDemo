@@ -4,7 +4,7 @@ package com.example.kevin.logindemo;
  * Created by Nick on 2/12/2018.
  */
 
-public class Users {
+class Users {
 
     private String Email;
     private int roomsReserved;
@@ -20,7 +20,7 @@ public class Users {
 
     /**
      * creates a user
-     * @param email
+     * @param email the email of the user
      */
     public Users(String email) {
         this.Email = email;

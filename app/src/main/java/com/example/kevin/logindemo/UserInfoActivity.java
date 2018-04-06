@@ -36,10 +36,10 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView displayEmail;
     private TextView displayPhone;
 
-    int rooms;
-    long vacants = 0;
-    long shelterID;
-    String shelterName;
+    private int rooms;
+    private long vacants = 0;
+    private long shelterID;
+    private String shelterName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

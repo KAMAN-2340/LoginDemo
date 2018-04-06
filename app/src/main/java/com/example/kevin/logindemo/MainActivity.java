@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * logs in
      *
-     * @param view
+     * @param view the view
      */
     public void loginClicked(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * registers clicking
      *
-     * @param view
+     * @param view the view
      */
     public void registerClicked(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);

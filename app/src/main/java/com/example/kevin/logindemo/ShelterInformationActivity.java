@@ -39,7 +39,6 @@ public class ShelterInformationActivity extends AppCompatActivity {
     private TextView vacancyTextView;
 
     private EditText inputReserveEditText;
-    private Button reserveButton;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
@@ -48,9 +47,9 @@ public class ShelterInformationActivity extends AppCompatActivity {
     private ValueEventListener mUserListener;
     private ValueEventListener mShelterListener;
 
-    int userReserved = 0;
-    long vacants = 0;
-    int rooms = 0;
+    private int userReserved = 0;
+    private long vacants = 0;
+    private int rooms = 0;
     private Shelter shelter;
 
     @Override
@@ -81,7 +80,7 @@ public class ShelterInformationActivity extends AppCompatActivity {
         vacancyTextView = findViewById(R.id.vacancy_text_view);
 
         inputReserveEditText = findViewById(R.id.editText_reserve);
-        reserveButton = findViewById(R.id.reserve_room_button);
+        Button reserveButton = findViewById(R.id.reserve_room_button);
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

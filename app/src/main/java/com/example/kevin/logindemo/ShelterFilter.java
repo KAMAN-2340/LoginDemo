@@ -7,9 +7,9 @@ import java.util.List;
  * Created by Nick on 4/3/2018.
  */
 
-public class ShelterFilter {
+class ShelterFilter {
 
-    protected static List<Shelter> filter(CharSequence charSequence, List<Shelter> shelters) {
+    static List<Shelter> filter(CharSequence charSequence, List<Shelter> shelters) {
         List<Shelter> filteredShelters = new ArrayList<>();
         String charSequenceString = charSequence.toString().toLowerCase();
         if (charSequenceString.isEmpty()) {

@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * registers cancel being clicked
      *
-     * @param view
+     * @param view the view
      */
     public void registerCancelClicked(View view) {
         finish();
@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * registers clicked mouse button
      *
-     * @param view
+     * @param view the view
      */
     public void registerClicked(View view) {
         // Add to database and go to log-in
@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * registers mouse button being clicked on user button
      *
-     * @param view
+     * @param view the view
      */
     private void userButtonClicked(View view) {
         userRadioButton.setChecked(true);
@@ -146,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * registers mouse button being clicked on admin button
      *
-     * @param view
+     * @param view the view
      */
     private void adminButtonClicked(View view) {
         adminRadioButton.setChecked(true);
@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * creates firebase user
      *
-     * @param email
+     * @param email the email of the user
      */
     private void createFirebaseUser(String email) {
         Firebase.setAndroidContext(this);
@@ -164,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
         Users dummy = new Users(email);
         String id = email.substring(0, email.indexOf("@"));
         Firebase mRefChild = mRef.child("users");
-        Firebase mRefChildd = mRefChild.child(id);
+        Firebase mRefChildd = mRefChild.child(id); //typo in child
         mRefChildd.setValue(dummy);
 
     }

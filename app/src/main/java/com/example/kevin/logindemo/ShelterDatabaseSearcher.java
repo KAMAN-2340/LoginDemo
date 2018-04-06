@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Nick on 3/5/2018.
  */
 
-public class ShelterDatabaseSearcher {
+class ShelterDatabaseSearcher {
 
     /**
      * returns list of shelters that allow men
@@ -15,8 +15,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow men
      */
-    public static List<Shelter> searchMale(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchMale(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (!restrictions.contains("women")) {
@@ -36,8 +36,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow women
      */
-    public static List<Shelter> searchFemale(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchFemale(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions();
             if (restrictions.contains("Women") || restrictions.contains("women")) {
@@ -60,8 +60,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow families
      */
-    public static List<Shelter> searchFamily(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchFamily(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("families")) {
@@ -82,8 +82,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow newborns
      */
-    public static List<Shelter> searchNewborn(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchNewborn(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("newborn")) {
@@ -104,8 +104,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow families with newborns
      */
-    public static List<Shelter> searchFamiliesWithNewborns(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchFamiliesWithNewborns(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("newborn") || restrictions.contains("families")) {
@@ -126,8 +126,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return the list of shelters that allow children
      */
-    public static List<Shelter> searchChildren(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchChildren(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("children")) {
@@ -147,8 +147,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return the list of shelters that allow young adults
      */
-    public static List<Shelter> searchYoungAdults(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchYoungAdults(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("young adults")) {
@@ -168,8 +168,8 @@ public class ShelterDatabaseSearcher {
      * @param shelters list of shelters
      * @return list of shelters that allow anyone
      */
-    public static List<Shelter> searchAnyone(List<Shelter> shelters) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchAnyone(Iterable<Shelter> shelters) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String restrictions = sh.getRestrictions().toLowerCase();
             if (restrictions.contains("anyone")) {
@@ -187,8 +187,8 @@ public class ShelterDatabaseSearcher {
      * @param name name of the shelter being searched
      * @return
      */
-    public static List<Shelter> searchByName(List<Shelter> shelters, String name) {
-        ArrayList<Shelter> newFilteredList = new ArrayList<>();
+    public static List<Shelter> searchByName(Iterable<Shelter> shelters, CharSequence name) {
+        List<Shelter> newFilteredList = new ArrayList<>();
         for (Shelter sh : shelters) {
             String shName = sh.getName().toLowerCase();
             if (shName.contains(name)) {

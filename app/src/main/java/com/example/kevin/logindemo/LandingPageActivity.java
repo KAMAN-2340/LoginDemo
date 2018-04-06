@@ -153,7 +153,7 @@ public class LandingPageActivity extends AppCompatActivity
      /**
       * checks if google services are up
       *
-      * @return
+      * @return boolean value whether or not google services are up
       */
      private boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -167,8 +167,8 @@ public class LandingPageActivity extends AppCompatActivity
             return true;
         }
         else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            //an error occured but we can resolve it
-            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
+            //an error occurred but we can resolve it
+            Log.d(TAG, "isServicesOK: an error occurred but we can fix it");
             Dialog dialog = GoogleApiAvailability.
                     getInstance().getErrorDialog(LandingPageActivity.this,
                     available, ERROR_DIALOG_REQUEST);

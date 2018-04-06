@@ -20,8 +20,8 @@ abstract class Person {
     /**
      * creates person
      *
-     * @param login_name
-     * @param password
+     * @param login_name the login name of the user
+     * @param password the password of the user
      */
     Person(String login_name, String password) {
         this.login_name = login_name;
@@ -31,12 +31,12 @@ abstract class Person {
     /**
      * creates a person
      *
-     * @param login_name
-     * @param password
-     * @param first_name
-     * @param last_name
-     * @param gender
-     * @param contact_info
+     * @param login_name the login name of the person
+     * @param password the password of the person
+     * @param first_name the first name of the person
+     * @param last_name the last name of the person
+     * @param gender the gender of the person
+     * @param contact_info the contact information of the person
      */
     Person(String login_name, String password, String first_name, String last_name,
            int gender, String contact_info) {

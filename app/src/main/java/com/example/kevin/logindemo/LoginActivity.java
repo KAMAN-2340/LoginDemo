@@ -47,9 +47,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-     /**
-     * Temporary proof of concept to locally store users.
-     */
     //public static Users users = new Users();
     //public static Admins admins = new Admins();
 
@@ -230,6 +227,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return email.contains("");
     }
 
+    @SuppressWarnings("SameReturnValue")
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic. Maybe look for sql injection?
         return true;
@@ -409,7 +407,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * cancels login
      *
-     * @param view
+     * @param view the view
      */
     public void loginCancelClicked(View view) {
         finish();

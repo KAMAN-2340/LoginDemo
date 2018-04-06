@@ -49,7 +49,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     private ShelterDatabaseAdapter shelterDatabaseAdapter;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private ArrayList<Shelter> shelters = new ArrayList<>();
+    private List<Shelter> shelters = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @SuppressWarnings("unchecked")
-    private void getDeviceLoaction() {
+    private void getDeviceLoaction() { //Never used, typo in name
         Log.d(TAG, "getDeviceLoaction: getting the device's current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -143,8 +143,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
         switch(requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
@@ -156,6 +156,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                     initMap();
                 }
             }
+            //break?
             default:
                 Log.e(TAG, "Invalid Permission Request Code");
         }
@@ -176,7 +177,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                 -84.3880), DEFAULT_ZOOM));
     }
 
-    private void loadShelters(List<Shelter> shelters) {
+    private void loadShelters(Iterable<Shelter> shelters) {
         Log.d(TAG, "loadShelters: loading shelters");
         if (mLocationPermissionsGranted) {
             mMap.clear();
@@ -217,10 +218,6 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
+        return item.getItemId() == R.id.action_search || super.onOptionsItemSelected(item);
     }
 }

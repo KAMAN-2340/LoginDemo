@@ -18,7 +18,7 @@ class CSVParser {
 
     private InputStream inputStream;
     private ArrayList<Shelter> shelterArrayList;
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseRef = database.getReference().child("shelters");
 
      /**
@@ -29,7 +29,7 @@ class CSVParser {
      /**
      * parses CSV file
      *
-     * @param inputStream
+     * @param inputStream the input
      */
     public CSVParser(InputStream inputStream) {
         this.inputStream = inputStream;
@@ -47,7 +47,7 @@ class CSVParser {
      /**
      * returns a list of shelters
      *
-     * @return
+     * @return the list of available shelters
      */
     public ArrayList getShelters() {
         ArrayList<Shelter> shelterArrayList = new ArrayList<>();
@@ -59,12 +59,12 @@ class CSVParser {
                     shelterArrayList.add(new Shelter(line.split(",")));
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         } finally {
             try {
                 inputStream.close();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
 
             }
         }
@@ -74,7 +74,7 @@ class CSVParser {
      /**
      * sets shelter
      *
-     * @param list
+     * @param list the list of shelters to set
      */
     public void setShelter(ArrayList<Shelter> list) {
         this.shelterArrayList = list;

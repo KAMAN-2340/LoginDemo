@@ -1,6 +1,7 @@
 package com.example.kevin.logindemo;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Nick on 2/18/2018.
@@ -8,13 +9,13 @@ import java.util.HashMap;
 
 class Admins extends Person{
 
-    private HashMap<String, String> admins;
+    private Map<String, String> admins;
 
      /**
      * Creates an admin
      *
-     * @param login_name
-     * @param password
+     * @param login_name the login name for the admin
+     * @param password the password for the admin
      */
     public Admins(String login_name, String password) {
         super(login_name,password);
@@ -23,12 +24,12 @@ class Admins extends Person{
     /**
      * Creates an admin
      *
-     * @param login_name
-     * @param password
-     * @param first_name
-     * @param last_name
-     * @param gender
-     * @param contact_info
+     * @param login_name the login name of the admin
+     * @param password the password of the admin
+     * @param first_name the first name of the admin
+     * @param last_name the last name of the admin
+     * @param gender the gender of the admin
+     * @param contact_info the contact information of the admin
      */
     public Admins (String login_name, String password, String first_name, String last_name,
                   int gender, String contact_info) {
@@ -39,8 +40,8 @@ class Admins extends Person{
     /**
      * adds username and password and adds it to a hashmap
      *
-     * @param name
-     * @param password
+     * @param name the name to be added to the hashmap
+     * @param password the password to be added to the hashmap
      */
     public void add(String name, String password) {
         admins.put(name, password);
@@ -49,14 +50,11 @@ class Admins extends Person{
     /**
      * returns if name and password is in the hashmap
      *
-     * @param name
-     * @param password
+     * @param name the name to look for in the hashmap
+     * @param password the password to look for in the hashmap
      * @return
      */
     public boolean contains(String name, String password) {
-        if (admins.containsKey(name)) {
-            return admins.get(name).equals(password);
-        }
-        return false;
+        return admins.containsKey(name) && admins.get(name).equals(password);
     }
 }

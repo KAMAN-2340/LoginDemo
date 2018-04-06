@@ -50,7 +50,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
             View.OnLongClickListener {
 
         public ShelterItemClickListener shelterItemClickListener;
-        public TextView mTextView;
+        public final TextView mTextView;
 
         /**
          *
@@ -92,7 +92,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
      * @param context the current settings
      */
     @SuppressWarnings("unchecked")
-    public ShelterDatabaseAdapter(ArrayList shelters, ArrayList filteredShelters, Context context) {
+    public ShelterDatabaseAdapter(List shelters, List filteredShelters, Context context) {
         this.shelters = shelters;
         this.filteredShelters = filteredShelters;
         this.context = context;
@@ -103,8 +103,7 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
                                                    int viewType) {
         TextView v = (TextView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shelter_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     @Override

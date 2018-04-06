@@ -20,8 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
- /**
+/**
  * Homepage Activity holds list of shelters
  */
 public class HomePageActivity extends AppCompatActivity {
@@ -34,8 +35,8 @@ public class HomePageActivity extends AppCompatActivity {
     private DatabaseReference databaseRef;
     //private CSVParser csvParser = new CSVParser();
 
-    ArrayList<Shelter> shelters = new ArrayList<>();
-    final ArrayList<Shelter> tempList = new ArrayList<>();
+    private ArrayList<Shelter> shelters = new ArrayList<>();
+    private final List<Shelter> tempList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +127,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
+        return item.getItemId() == R.id.action_search || super.onOptionsItemSelected(item);
     }
 
 }
