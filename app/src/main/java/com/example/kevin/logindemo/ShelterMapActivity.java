@@ -75,8 +75,8 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     @SuppressWarnings("unchecked")
-    private void getDeviceLoaction() { //Never used, typo in name
-        Log.d(TAG, "getDeviceLoaction: getting the device's current location");
+    private void getDeviceLocation() { //Never used, typo in name
+        Log.d(TAG, "getDeviceLoacation: getting the device's current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -95,14 +95,14 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(ShelterMapActivity.this,
-                                    "unable to get current locaiton",
+                                    "unable to get current location",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         } catch (SecurityException e) {
-            Log.e(TAG, "getDeviceLoaction: " + e.getMessage());
+            Log.e(TAG, "getDeviceLocation: " + e.getMessage());
         }
     }
 
@@ -170,7 +170,7 @@ public class ShelterMapActivity extends AppCompatActivity implements OnMapReadyC
 
         loadShelters(shelters);
 
-        //getDeviceLoaction();
+        //getDeviceLocation();
 
         // the emulator's location is GooglePlex in CA, manually setting to Atlanta
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(33.7490,
