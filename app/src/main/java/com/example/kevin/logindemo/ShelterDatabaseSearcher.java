@@ -174,12 +174,14 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchAnyone(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if  (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;

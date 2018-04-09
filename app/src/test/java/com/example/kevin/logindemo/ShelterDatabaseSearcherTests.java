@@ -81,6 +81,10 @@ public class ShelterDatabaseSearcherTests {
                 "555-555-5555", restrictionYoungAdults, "Nick's Crib",
                 "The coolest crib", 9, 200));
 
+        shelterList.add(new Shelter("123 Crayola Rd", "200", 40, -300,
+                "555-555-5555", "", "Nick's Crib",
+                "The coolest crib", 10, 200));
+
     }
 
 
@@ -95,7 +99,7 @@ public class ShelterDatabaseSearcherTests {
     public void searchForYoungAdultContains() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchYoungAdults(shelterList);
-        assertEquals(4, filteredList.size());
+        assertEquals(5, filteredList.size());
 //        assertEquals(6, filteredList.get(0).getKey());
 //        assertEquals(9, filteredList.get(1).getKey());
     }
@@ -121,12 +125,13 @@ public class ShelterDatabaseSearcherTests {
     public void searchForFamilyContains() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchFamily(shelterList);
-        assertEquals(4, filteredList.size());
+        assertEquals(5, filteredList.size());
 
         assertEquals(0, filteredList.get(0).getKey());
         assertEquals(1, filteredList.get(1).getKey());
         assertEquals(7, filteredList.get(2).getKey());
         assertEquals(8, filteredList.get(3).getKey());
+        assertEquals(10, filteredList.get(4).getKey());
     }
 
     @Test(timeout = TIMEOUT)
@@ -136,6 +141,36 @@ public class ShelterDatabaseSearcherTests {
         boolean removed = shelterList.remove(filteredList.get(0));
         assertTrue(removed);
         assertFalse(shelterList.remove(filteredList.get(0)));
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void searchForAnyoneEmpty() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchAnyone(emptyList);
+        assertEquals(0, filteredList.size());
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void searchForAnyoneContains() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchAnyone(shelterList);
+        assertEquals(3, filteredList.size());
+
+        assertEquals(1, filteredList.get(0).getKey());
+        assertEquals(7, filteredList.get(1).getKey());
+        assertEquals(10, filteredList.get(2).getKey());
+    }
+
+    @Test(timeout = TIMEOUT)
+    public void searchForAnyoneDoesntContain() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchYoungAdults(shelterList);
+        boolean removed = shelterList.remove(filteredList.get(0));
+        assertTrue(removed);
+        assertFalse(shelterList.remove(filteredList.get(0)));
+        removed = shelterList.remove(filteredList.get(1));
+        assertTrue(removed);
+        assertFalse(shelterList.remove(filteredList.get(1)));
     }
 
 }
