@@ -87,7 +87,7 @@ public class ShelterDatabaseSearcherTests {
 
     }
 
-
+//Kevin Nguyen YoungAdults Test
     @Test(timeout = TIMEOUT)
     public void searchForYoungAdultEmpty() {
         List<Shelter> filteredList =
@@ -114,6 +114,7 @@ public class ShelterDatabaseSearcherTests {
     }
 
 
+ //Amani Konduru Family Test
     @Test(timeout = TIMEOUT)
     public void searchForFamilyEmpty() {
         List<Shelter> filteredList =
@@ -143,6 +144,7 @@ public class ShelterDatabaseSearcherTests {
         assertFalse(shelterList.remove(filteredList.get(0)));
     }
 
+    //Nick SearchAnyone
     @Test(timeout = TIMEOUT)
     public void searchForAnyoneEmpty() {
         List<Shelter> filteredList =
@@ -173,6 +175,7 @@ public class ShelterDatabaseSearcherTests {
         assertFalse(shelterList.remove(filteredList.get(1)));
     }
 
+ //Allana SearchFemale
     Test(timeout = TIMEOUT)
     public void searchByFemaleEmpty() {
         List<Shelter> filteredList =
@@ -203,7 +206,7 @@ public class ShelterDatabaseSearcherTests {
         assertFalse(shelterList.remove(filteredList.get(0)));
     }
 
-
+//Madison SearchChildren
 
     Test(timeout = TIMEOUT)
     public void searchByChildrenEmpty() {
