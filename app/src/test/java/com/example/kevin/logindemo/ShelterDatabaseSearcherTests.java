@@ -173,4 +173,34 @@ public class ShelterDatabaseSearcherTests {
         assertFalse(shelterList.remove(filteredList.get(1)));
     }
 
+    Test(timeout = TIMEOUT)
+    public void searchByFemaleEmpty() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFemale(emptyList);
+        assertEquals(0, filteredList.size());
+    }
+
+
+@Test(timeout = TIMEOUT)
+    public void searchForFemaleContains() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFemale(shelterList);
+        assertEquals(4, filteredList.size());
+
+        assertEquals(1, filteredList.get(0).getKey()); //anyone
+        assertEquals(3, filteredList.get(1).getKey()); //female
+        assertEquals(7, filteredList.get(2).getKey()); //anyone
+        assertEquals(10, filteredList.get(3).getKey()); //nothing
+    }
+
+
+@Test(timeout = TIMEOUT)
+    public void searchForFemaleDoesntContain() {
+        List<Shelter> filteredList =
+                ShelterDatabaseSearcher.searchFemale(shelterList);
+        boolean removed = shelterList.remove(filteredList.get(0));
+        assertTrue(removed);
+        assertFalse(shelterList.remove(filteredList.get(0)));
+    }
+
 }
