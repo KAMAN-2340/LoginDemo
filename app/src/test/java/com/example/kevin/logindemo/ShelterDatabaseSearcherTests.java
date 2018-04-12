@@ -176,7 +176,7 @@ public class ShelterDatabaseSearcherTests {
     }
 
  //Allana SearchFemale
-    Test(timeout = TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void searchByFemaleEmpty() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchFemale(emptyList);
@@ -184,20 +184,20 @@ public class ShelterDatabaseSearcherTests {
     }
 
 
-@Test(timeout = TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void searchForFemaleContains() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchFemale(shelterList);
-        assertEquals(4, filteredList.size());
+        assertEquals(11, filteredList.size());
 
-        assertEquals(1, filteredList.get(0).getKey()); //anyone
-        assertEquals(3, filteredList.get(1).getKey()); //female
-        assertEquals(7, filteredList.get(2).getKey()); //anyone
-        assertEquals(10, filteredList.get(3).getKey()); //nothing
+        assertEquals(0, filteredList.get(0).getKey()); //anyone
+        assertEquals(1, filteredList.get(1).getKey()); //female
+        assertEquals(3, filteredList.get(2).getKey()); //anyone
+        assertEquals(5, filteredList.get(4).getKey()); //nothing
     }
 
 
-@Test(timeout = TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void searchForFemaleDoesntContain() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchFemale(shelterList);
@@ -208,7 +208,7 @@ public class ShelterDatabaseSearcherTests {
 
 //Madison SearchChildren
 
-    Test(timeout = TIMEOUT)
+    @Test(timeout = TIMEOUT)
     public void searchByChildrenEmpty() {
         List<Shelter> filteredList =
                 ShelterDatabaseSearcher.searchChildren(emptyList);

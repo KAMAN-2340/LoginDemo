@@ -17,15 +17,17 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchMale(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (!restrictions.contains("women")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (!restrictions.contains("women")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
@@ -38,17 +40,19 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchFemale(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions();
-            if (restrictions.contains("Women") || restrictions.contains("women")) {
-                newFilteredList.add(sh);
-            } else if (!restrictions.contains("Men")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions();
+                if (restrictions.contains("Women") || restrictions.contains("women")) {
+                    newFilteredList.add(sh);
+                } else if (!restrictions.contains("Men")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
@@ -62,7 +66,7 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchFamily(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        if  (shelters != null) {
+        if (shelters != null) {
             for (Shelter sh : shelters) {
                 String restrictions = sh.getRestrictions().toLowerCase();
                 if (restrictions.contains("families")) {
@@ -86,15 +90,17 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchNewborn(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (restrictions.contains("newborn")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (restrictions.contains("newborn")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
@@ -108,15 +114,17 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchFamiliesWithNewborns(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (restrictions.contains("newborn") || restrictions.contains("families")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (restrictions.contains("newborn") || restrictions.contains("families")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
@@ -130,15 +138,17 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchChildren(Iterable<Shelter> shelters) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String restrictions = sh.getRestrictions().toLowerCase();
-            if (restrictions.contains("children")) {
-                newFilteredList.add(sh);
-            }
-            if (restrictions.contains("anyone")) {
-                newFilteredList.add(sh);
-            } else if (restrictions.isEmpty()) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String restrictions = sh.getRestrictions().toLowerCase();
+                if (restrictions.contains("children")) {
+                    newFilteredList.add(sh);
+                }
+                if (restrictions.contains("anyone")) {
+                    newFilteredList.add(sh);
+                } else if (restrictions.isEmpty()) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
@@ -195,10 +205,12 @@ public class ShelterDatabaseSearcher {
      */
     public static List<Shelter> searchByName(Iterable<Shelter> shelters, CharSequence name) {
         List<Shelter> newFilteredList = new ArrayList<>();
-        for (Shelter sh : shelters) {
-            String shName = sh.getName().toLowerCase();
-            if (shName.contains(name)) {
-                newFilteredList.add(sh);
+        if (shelters != null) {
+            for (Shelter sh : shelters) {
+                String shName = sh.getName().toLowerCase();
+                if (shName.contains(name)) {
+                    newFilteredList.add(sh);
+                }
             }
         }
         return newFilteredList;
