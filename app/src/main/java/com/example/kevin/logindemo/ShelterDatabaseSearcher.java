@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by Nick on 3/5/2018.
+ * Contains method that filters the list of shelters
  */
 
 public class ShelterDatabaseSearcher {
@@ -201,7 +202,7 @@ public class ShelterDatabaseSearcher {
      * returns a specific shelter when searched by name
      * @param shelters list of shelters
      * @param name name of the shelter being searched
-     * @return
+     * @return return a list of shelters given by Name
      */
     public static List<Shelter> searchByName(Iterable<Shelter> shelters, CharSequence name) {
         List<Shelter> newFilteredList = new ArrayList<>();

@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by Nick on 2/26/2018.
+ * Adapter that gathers the list of shelters and performs functions and displays filtered list
  */
 
 public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabaseAdapter.ViewHolder>
@@ -53,8 +54,8 @@ public class ShelterDatabaseAdapter extends RecyclerView.Adapter<ShelterDatabase
         public final TextView mTextView;
 
         /**
-         *
-         * @param v
+         * Updates the given filter language
+         * @param v Textview that holds the filter language
          */
         public ViewHolder(TextView v) {
             super(v);

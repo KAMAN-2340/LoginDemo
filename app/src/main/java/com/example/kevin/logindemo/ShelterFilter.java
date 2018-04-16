@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by Nick on 4/3/2018.
+ * Filter class that selects which search to be done
  */
 
 class ShelterFilter {

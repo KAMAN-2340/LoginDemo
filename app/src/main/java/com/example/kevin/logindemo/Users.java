@@ -2,6 +2,7 @@ package com.example.kevin.logindemo;
 
 /**
  * Created by Nick on 2/12/2018.
+ * Class that represents user type object
  */
 
 class Users {

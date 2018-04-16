@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Nick on 2/26/2018.
+ * Parser Script that runs and compiles the given data into a list
  */
 
 class CSVParser {
@@ -38,7 +39,7 @@ class CSVParser {
      /**
      * parses CSV file
      *
-     * @param list
+     * @param list Initial shelter list
      */
     public CSVParser(ArrayList<Shelter> list) {
         this.shelterArrayList = list;

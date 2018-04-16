@@ -2,6 +2,7 @@ package com.example.kevin.logindemo;
 
 /**
  * Created by Kevin on 3/23/2018.
+ * Generic person parent class
  */
 
 abstract class Person {

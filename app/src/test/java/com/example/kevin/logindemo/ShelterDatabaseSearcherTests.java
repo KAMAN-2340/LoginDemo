@@ -1,3 +1,4 @@
+package com.example.kevin.logindemo;
 
 import com.example.kevin.logindemo.*;
 
@@ -10,34 +11,24 @@ import java.util.List;
 import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
 
 
 public class ShelterDatabaseSearcherTests {
     private List<Shelter> shelterList;
     private List<Shelter> emptyList;
 
-    private String restrictionFamilies;
-    private String restrictionAnyone;
-    private String restrictionMale;
-    private String restrictionFemale;
-    private String restrictionNewborn;
-    private String restrictionChildren;
-    private String restrictionYoungAdults;
-
-
 
     public static final int TIMEOUT = 200;
 
     @Before
     public void setUp() {
-        restrictionFamilies = "Families";
-        restrictionAnyone = "Anyone";
-        restrictionMale = "Men";
-        restrictionFemale = "Women";
-        restrictionNewborn = "Newborn";
-        restrictionChildren = "Children";
-        restrictionYoungAdults = "Young Adults";
+        String restrictionFamilies = "Families";
+        String restrictionAnyone = "Anyone";
+        String restrictionMale = "Men";
+        String restrictionFemale = "Women";
+        String restrictionNewborn = "Newborn";
+        String restrictionChildren = "Children";
+        String restrictionYoungAdults = "Young Adults";
 
         shelterList = new ArrayList<>();
 

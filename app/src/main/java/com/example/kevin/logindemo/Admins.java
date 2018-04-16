@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Created by Nick on 2/18/2018.
+ * Admins class that represents an Admin Type object/User
  */
 
 class Admins extends Person{
@@ -52,7 +53,7 @@ class Admins extends Person{
      *
      * @param name the name to look for in the hashmap
      * @param password the password to look for in the hashmap
-     * @return
+     * @return boolean if hashmap contains given params
      */
     public boolean contains(String name, String password) {
         return admins.containsKey(name) && admins.get(name).equals(password);

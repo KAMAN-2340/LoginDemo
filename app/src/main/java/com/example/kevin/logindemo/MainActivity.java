@@ -9,6 +9,7 @@ import android.widget.Button;
 
 /**
  * Created by Nick on 2/12/2018.
+ * Startup screen for the app
  */
 
 public class MainActivity extends AppCompatActivity {
